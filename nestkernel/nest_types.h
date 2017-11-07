@@ -202,6 +202,6 @@ inline SignalType operator|(SignalType a, SignalType b)
   return static_cast<SignalType>(static_cast<int>(a) | static_cast<int>(b));
 }
 
-}
+} // namespace nest
 
 #endif // NEST_TYPES_H
