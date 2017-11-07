@@ -196,6 +196,12 @@ enum SignalType
   STEPWISE_CONSTANT = 4,
   ALL = SPIKE | BINARY | STEPWISE_CONSTANT
 };
+
+inline SignalType operator|(SignalType a, SignalType b)
+{
+  return static_cast<SignalType>(static_cast<int>(a) | static_cast<int>(b));
+}
+
 }
 
 #endif // NEST_TYPES_H
