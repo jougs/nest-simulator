@@ -46,6 +46,7 @@ if ( NOT CMAKE_CROSSCOMPILING )
       # directory for documentation.
       install( DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/help"
         DESTINATION "${CMAKE_INSTALL_DOCDIR}"
+        OPTIONAL
         )
       
       # Update the global help index to contain all help files that are
