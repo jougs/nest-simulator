@@ -26,6 +26,7 @@ import cython
 
 from libc.stdlib cimport malloc, free
 from libc.string cimport memcpy
+from libc.stdint cimport uintptr_t
 
 from libcpp.string cimport string
 from libcpp.vector cimport vector
@@ -241,6 +242,12 @@ cdef class NESTEngine(object):
 
         return ret
 
+def _python_object_to_datum(obj):
+    """returns a Datum*"""
+    return __python_object_to_datum(obj)
+
+cdef inline uintptr_t __python_object_to_datum(obj) except 0:
+    return <uintptr_t>python_object_to_datum(obj)
 
 cdef inline Datum* python_object_to_datum(obj) except NULL:
 

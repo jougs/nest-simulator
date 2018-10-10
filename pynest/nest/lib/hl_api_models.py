@@ -22,9 +22,10 @@
 """
 Functions for model handling
 """
+import pyximport
+pyximport.install()
 
 from .hl_api_helper import *
-
 
 @check_stack
 def Models(mtype="all", sel=None):
@@ -77,7 +78,7 @@ def Models(mtype="all", sel=None):
         models = [x for x in models if x.find(sel) >= 0]
 
     models.sort()
-
+    print("XXXXXXXXXXXXXXXXX: MODELS = " + str(models))
     return tuple(models)
 
 
@@ -115,6 +116,7 @@ def SetDefaults(model, params, val=None):
         If given, params has to be the name of a model property.
     """
 
+    print("XXXXXXXXXXXXXXXXX: setdefaults")
     if val is not None:
         if is_literal(params):
             params = {params: val}
@@ -186,11 +188,21 @@ def CopyModel(existing, new, params=None):
         Default parameters assigned to the copy. Not provided parameters are
         taken from the existing model.
     """
+    from nest.pynestkernel import _python_object_to_datum
 
     model_deprecation_warning(existing)
+    params_datum_ptr = kernel._python_object_to_datum(params)
+    copy_model( existing, new, params_datum_ptr )
 
-    if params is not None:
-        sps(params)
-        sr("/%s /%s 3 2 roll CopyModel" % (existing, new))
-    else:
-        sr("/%s /%s CopyModel" % (existing, new))
+    
+
+
+
+    # model_deprecation_warning(existing)
+
+    # if params is not None:
+    #     sps(params)
+    #     sr("/%s /%s 3 2 roll CopyModel" % (existing, new))
+    # else:
+    #     sr("/%s /%s CopyModel" % (existing, new))
+
