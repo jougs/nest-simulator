@@ -190,3 +190,7 @@ ctypedef fused numeric_buffer_t:
 
     buffer_float_1d_t
     buffer_double_1d_t
+
+# cdef inline Datum* python_object_to_datum(obj) except NULL
+# N.B. declaration here makes the function accessible to other cython modules; this does not affect from-Python importing
+
