@@ -149,17 +149,10 @@ JME: Update for NESTIO!! All of this documentation is kind of outdated
   recording device. Setting this to false can lead to conflicting file names.
 
   The following parameters control how output is formatted:
-  /withweight    - boolean value which specifies whether the weight of the event
-                   should be recorded (default: false).
   /time_in_steps - boolean value which specifies whether to print time in steps,
                    i.e., multiples of the resolution, rather than in ms. If
                    combined with /precise_times, each time is printed as a pair
                    of an integer step number and a double offset < 0.
-  /scientific    - if set to true, doubles are written in scientific format,
-                   otherwise in fixed format; affects file output only, not
-                   screen output (default: false)
-  /precision     - number of digits to use in output of doubles to file
-                   (default: 3)
   /binary        - if set to true, data is written in binary mode to files
                    instead of ASCII. This setting affects file output only, not
                    screen output (default: false)
@@ -175,12 +168,10 @@ JME: Update for NESTIO!! All of this documentation is kind of outdated
                    0, but no other value. Setting n_events to 0 will delete all
                    spikes recorded in memory. n_events will count events even
                    when not recording to memory.
-  /events        - Dictionary with elements /senders (sender GID, only if
-                   /withgid or /withpath are true), /times (spike times in ms or
-                   steps, depending on /time_in_steps; only if /withtime is
-                   true) and /offsets (only if /time_in_steps, /precise_times
-                   and /withtime are true). All data stored in memory is erased
-                   when /n_events is set to 0.
+  /events        - Dictionary with elements /senders (sender GID), /times (spike
+                   times in ms or steps, depending on /time_in_steps) and
+                   /offsets (only if /time_in_steps). All data stored in memory
+                   is erased when /n_events is set to 0.
 
   SeeAlso: Device, StimulatingDevice
 */
