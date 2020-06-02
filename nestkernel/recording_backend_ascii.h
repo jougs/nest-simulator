@@ -28,12 +28,12 @@
 
 #include "recording_backend.h"
 
-/* BeginUserDocs: recording backend
+/* BeginUserDocs
 
-.. _ascii_backend:
+.. _recording_backend_ascii:
 
 Write data to plain text files
-##############################
+==============================
 
 The `ascii` recording backend writes collected data persistently to a
 plain text ASCII file. It can be used for small to medium sized

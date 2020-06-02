@@ -23,7 +23,7 @@ import re
 from tqdm import tqdm
 from pprint import pformat
 try:
-    from math import comb   # breaks in python<3.8
+    from math import comb   # not available in Python < 3.8
 except ImportError:
     from math import factorial as fac
 
@@ -260,7 +260,7 @@ def rewrite_see_also(doc, filename, tags, see_also="See also"):
             log.warning("dropping manual 'see also' list in %s user docs: '%s'", filename, original)
         return (
             doc[:secstart] +
-            "\n" + ", ".join([":doc:`{taglabel} <index_{tag}>`".format(tag=tag, taglabel=rightcase(tag))
+            "\n" + ", ".join([":doc:`{taglabel} </userdocs/index_{tag}>`".format(tag=tag, taglabel=rightcase(tag))
                              for tag in tags]) + "\n\n" +
             doc[secend:]
             )
@@ -351,14 +351,14 @@ def rst_index(hierarchy, current_tags=[], underlines='=-~', top=True):
         text = t
         if t != t.upper():
             text = t.title()  # title-case any tag that is not an acronym
-        title = ':doc:`{text} <{filename}>`'.format(
+        title = ':doc:`{text} </userdocs/{filename}>`'.format(
             text=text,
             filename=link or "index_"+t)
         text = title+'\n'+ul*len(title)+'\n'
         return text
 
     def mkitem(t):
-        return "* :doc:`%s`" % os.path.splitext(t)[0]
+        return "* :doc:`/userdocs/%s`" % os.path.splitext(t)[0]
 
     output = list()
     if top:
@@ -380,6 +380,8 @@ def rst_index(hierarchy, current_tags=[], underlines='=-~', top=True):
         if isinstance(items, dict):
             output.append(rst_index(items, current_tags, underlines[1:], top=False))
         else:
+            if tags == "":
+                continue
             for item in sorted(items):
                 output.append(mkitem(item))
             output.append("")

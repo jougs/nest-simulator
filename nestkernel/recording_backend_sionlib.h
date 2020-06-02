@@ -29,12 +29,12 @@
 
 #include "recording_backend.h"
 
-/* BeginUserDocs: recording backend
+/* BeginUserDocs
 
-.. _sionlib_backend:
+.. _recording_backend_sionlib:
 
 Store data to an efficient binary format
-########################################
+========================================
 
 The `sionlib` recording backend writes collected data persistently to
 a binary container file (or to a rather small set of such files). This

@@ -64,6 +64,11 @@ spike creation rather than that of their arrival.
 The call to ``Connect`` will fail if the connection direction is
 reversed (i.e., connecting *sd* to *neurons*).
 
+See also
+++++++++
+
+:doc:`<guides/recording_from_simulations>`
+
 EndUserDocs */
 
 namespace nest

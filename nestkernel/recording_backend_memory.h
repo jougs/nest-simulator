@@ -26,10 +26,12 @@
 // Includes from nestkernel:
 #include "recording_backend.h"
 
-/* BeginUserDocs: recording backend
+/* BeginUserDocs
+
+.. _recording_backend_memory_backend:
 
 Store data in main memory
-#########################
+=========================
 
 When a recording device sends data to the ``memory`` backend, it is
 stored internally in efficient vectors. These vectors are made available to the

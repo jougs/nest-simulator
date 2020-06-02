@@ -1294,9 +1294,8 @@ modular infrastructure for handling recordings: each modality is now
 taken care of by a specific recording backend and each recorder can
 use one of them to handle its data.
 
-NEST 3.0 supports the same recording backends for all modalities
-as in NEST 2.x. If compiled with support for `SIONlib
-<http://www.fz-juelich.de/jsc/sionlib>`_, an additional backend for
+NEST 3.0 supports recording backends for the same modalities as NEST
+2.x did. If compiled with support for SIONlib, an additional backend for
 writing binary files in parallel becomes available. This is especially
 useful on large clusters and supercomputers.
 
@@ -1362,7 +1361,7 @@ demand, the functionality will be re-added in form of a recording
 backend.
 
 All details about the new infrastructure can be found in the guide on
-:doc:`recording from simulations <recording_from_simulations>`.
+:doc:`recording from simulations <guides/recording_from_simulations>`.
 
 
 What's removed?

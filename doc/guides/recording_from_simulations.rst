@@ -1,5 +1,5 @@
 Recording from simulations
-==========================
+##########################
 
 *Recording devices* (or *recorders*, in short) are used to sample or
 collect observable quantities like potentials, conductances, or spikes
@@ -179,7 +179,5 @@ dictionary to ``SetKernelStatus``.
 .. include:: ../userdocs/recording_backend_ascii.rst
 
 .. include:: ../userdocs/recording_backend_screen.rst
-
-.. _sionlib_backend:
 
 .. include:: ../userdocs/recording_backend_sionlib.rst
