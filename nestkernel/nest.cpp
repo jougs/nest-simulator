@@ -35,7 +35,7 @@
 #include "sliexceptions.h"
 #include "token.h"
 
-namespace nest
+namespace nest::api
 {
 
 void
@@ -580,4 +580,4 @@ node_collection_array_index( const Datum* datum, const bool* array, unsigned lon
   return new NodeCollectionDatum( NodeCollection::create( node_ids ) );
 }
 
-} // namespace nest
+} // namespace nest::api

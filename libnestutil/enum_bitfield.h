@@ -132,7 +132,7 @@ enumFlagSet( const Enum en, const Enum flag )
   using underlying = typename std::underlying_type< Enum >::type;
   return static_cast< underlying >( en & flag ) != 0;
 };
-}
 
+} // namespace nest
 
 #endif /* ENUM_BITFIELD_H */

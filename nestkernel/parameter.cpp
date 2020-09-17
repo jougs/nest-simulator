@@ -44,7 +44,7 @@ Parameter::apply( const NodeCollectionPTR& nc, const TokenArray& token_array ) c
 {
   std::vector< double > result;
   result.reserve( token_array.size() );
-  librandom::RngPtr rng = get_global_rng();
+  librandom::RngPtr rng = api::get_global_rng();
 
   // Get source layer from the NodeCollection
   auto source_metadata = nc->get_metadata();

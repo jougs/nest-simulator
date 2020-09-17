@@ -25,7 +25,7 @@
 #include "kernel_manager.h"
 
 
-namespace nest
+namespace nest::api
 {
 
 template < template < typename > class ConnectorModelT >
@@ -41,4 +41,5 @@ register_secondary_connection_model( const std::string& name, const RegisterConn
 {
   kernel().model_manager.register_secondary_connection_model< ConnectorModelT >( name, flags );
 }
-}
+
+} // namespace nest::api

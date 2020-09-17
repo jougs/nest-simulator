@@ -84,10 +84,10 @@ neststartup( int* argc, char*** argv, SLIInterpreter& engine )
 neststartup( int* argc, char*** argv, SLIInterpreter& engine, std::string modulepath )
 #endif
 {
-  nest::init_nest( argc, argv );
+  nest::api::init_nest( argc, argv );
 
   sli_engine = &engine;
-  register_logger_client( sli_logging );
+  nest::api::register_logger_client( sli_logging );
 
 // We disable synchronization between stdio and istd::ostreams
 // this has to be done before any in- or output has been done.

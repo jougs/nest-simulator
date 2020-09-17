@@ -342,7 +342,7 @@ NestModule::SetStatus_idFunction::execute( SLIInterpreter* i ) const
   DictionaryDatum dict = getValue< DictionaryDatum >( i->OStack.top() );
   index node_id = getValue< long >( i->OStack.pick( 1 ) );
 
-  set_node_status( node_id, dict );
+  api::set_node_status( node_id, dict );
 
   i->OStack.pop( 2 );
   i->EStack.pop();
@@ -356,7 +356,7 @@ NestModule::SetStatus_CDFunction::execute( SLIInterpreter* i ) const
   DictionaryDatum dict = getValue< DictionaryDatum >( i->OStack.top() );
   ConnectionDatum conn = getValue< ConnectionDatum >( i->OStack.pick( 1 ) );
 
-  set_connection_status( conn, dict );
+  api::set_connection_status( conn, dict );
 
   i->OStack.pop( 2 );
   i->EStack.pop();
@@ -369,7 +369,7 @@ NestModule::SetKernelStatus_DFunction::execute( SLIInterpreter* i ) const
 
   DictionaryDatum dict = getValue< DictionaryDatum >( i->OStack.top() );
 
-  set_kernel_status( dict );
+  api::set_kernel_status( dict );
 
   i->OStack.pop();
   i->EStack.pop();
@@ -509,7 +509,7 @@ NestModule::GetStatus_gFunction::execute( SLIInterpreter* i ) const
   for ( NodeCollection::const_iterator it = nc->begin(); it < nc->end(); ++it )
   {
     index node_id = ( *it ).node_id;
-    DictionaryDatum dict = get_node_status( node_id );
+    DictionaryDatum dict = api::get_node_status( node_id );
     result.push_back( dict );
   }
 
@@ -524,7 +524,7 @@ NestModule::GetStatus_iFunction::execute( SLIInterpreter* i ) const
   i->assert_stack_load( 1 );
 
   index node_id = getValue< long >( i->OStack.pick( 0 ) );
-  DictionaryDatum dict = get_node_status( node_id );
+  DictionaryDatum dict = api::get_node_status( node_id );
 
   i->OStack.pop();
   i->OStack.push( dict );
@@ -604,7 +604,7 @@ NestModule::GetMetadata_gFunction::execute( SLIInterpreter* i ) const
 void
 NestModule::GetKernelStatus_Function::execute( SLIInterpreter* i ) const
 {
-  DictionaryDatum dict = get_kernel_status();
+  DictionaryDatum dict = api::get_kernel_status();
 
   i->OStack.push( dict );
   i->EStack.pop();
@@ -625,7 +625,7 @@ NestModule::SetDefaults_l_DFunction::execute( SLIInterpreter* i ) const
   const Name name = getValue< Name >( i->OStack.pick( 1 ) );
   DictionaryDatum params = getValue< DictionaryDatum >( i->OStack.pick( 0 ) );
 
-  kernel().model_manager.set_model_defaults( name, params );
+  api::set_model_defaults( name, params );
 
   i->OStack.pop( 2 );
   i->EStack.pop();
@@ -645,7 +645,7 @@ NestModule::GetDefaults_lFunction::execute( SLIInterpreter* i ) const
 
   const Name modelname = getValue< Name >( i->OStack.pick( 0 ) );
 
-  DictionaryDatum dict = get_model_defaults( modelname );
+  DictionaryDatum dict = api::get_model_defaults( modelname );
 
   i->OStack.pop();
   i->OStack.push( dict );
@@ -659,7 +659,7 @@ NestModule::GetConnections_DFunction::execute( SLIInterpreter* i ) const
 
   DictionaryDatum dict = getValue< DictionaryDatum >( i->OStack.pick( 0 ) );
 
-  ArrayDatum array = get_connections( dict );
+  ArrayDatum array = api::get_connections( dict );
 
   i->OStack.pop();
   i->OStack.push( array );
@@ -683,7 +683,7 @@ NestModule::SimulateFunction::execute( SLIInterpreter* i ) const
 
   const double time = i->OStack.top();
 
-  simulate( time );
+  api::simulate( time );
 
   // successful end of simulate
   i->OStack.pop();
@@ -714,7 +714,7 @@ NestModule::RunFunction::execute( SLIInterpreter* i ) const
 
   const double time = i->OStack.top();
 
-  run( time );
+  api::run( time );
 
   i->OStack.pop();
   i->EStack.pop();
@@ -740,7 +740,7 @@ NestModule::RunFunction::execute( SLIInterpreter* i ) const
 void
 NestModule::PrepareFunction::execute( SLIInterpreter* i ) const
 {
-  prepare();
+  api::prepare();
   i->EStack.pop();
 }
 
@@ -763,7 +763,7 @@ NestModule::PrepareFunction::execute( SLIInterpreter* i ) const
 void
 NestModule::CleanupFunction::execute( SLIInterpreter* i ) const
 {
-  cleanup();
+  api::cleanup();
   i->EStack.pop();
 }
 
@@ -794,7 +794,7 @@ NestModule::CopyModel_l_l_DFunction::execute( SLIInterpreter* i ) const
   const Name new_name = getValue< Name >( i->OStack.pick( 1 ) );
   DictionaryDatum params = getValue< DictionaryDatum >( i->OStack.pick( 0 ) );
 
-  kernel().model_manager.copy_model( old_name, new_name, params );
+  api::copy_model( old_name, new_name, params );
 
   i->OStack.pop( 3 );
   i->EStack.pop();
@@ -839,7 +839,7 @@ NestModule::Create_l_iFunction::execute( SLIInterpreter* i ) const
 
   const std::string modname = getValue< std::string >( i->OStack.pick( 1 ) );
 
-  NodeCollectionDatum nodes_created = create( modname, n_nodes );
+  NodeCollectionDatum nodes_created = api::create( modname, n_nodes );
 
   i->OStack.pop( 2 );
   i->OStack.push( nodes_created );
@@ -856,7 +856,7 @@ NestModule::GetNodes_D_b::execute( SLIInterpreter* i ) const
   const bool local_only = getValue< bool >( i->OStack.pick( 0 ) );
   const DictionaryDatum params = getValue< DictionaryDatum >( i->OStack.pick( 1 ) );
 
-  NodeCollectionDatum nodes = get_nodes( params, local_only );
+  NodeCollectionDatum nodes = api::get_nodes( params, local_only );
 
   i->OStack.pop( 2 );
   i->OStack.push( nodes );
@@ -885,7 +885,7 @@ NestModule::GetNodes_D_b::execute( SLIInterpreter* i ) const
 void
 NestModule::ResetKernelFunction::execute( SLIInterpreter* i ) const
 {
-  reset_kernel();
+  api::reset_kernel();
   i->EStack.pop();
 }
 
@@ -959,7 +959,7 @@ NestModule::MemoryInfoFunction::execute( SLIInterpreter* i ) const
 void
 NestModule::PrintNodesFunction::execute( SLIInterpreter* i ) const
 {
-  print_nodes_to_stream();
+  api::print_nodes_to_stream();
   std::cout << std::endl;
   i->EStack.pop();
 }
@@ -978,7 +978,7 @@ void
 NestModule::PrintNodesToStreamFunction::execute( SLIInterpreter* i ) const
 {
   std::stringstream out;
-  print_nodes_to_stream( out );
+  api::print_nodes_to_stream( out );
 
   i->OStack.push( out.str() );
   i->EStack.pop();
@@ -1070,7 +1070,7 @@ NestModule::SetFakeNumProcesses_iFunction::execute( SLIInterpreter* i ) const
   i->assert_stack_load( 1 );
   long n_procs = getValue< long >( i->OStack.pick( 0 ) );
 
-  enable_dryrun_mode( n_procs );
+  api::enable_dryrun_mode( n_procs );
 
   i->OStack.pop( 1 );
   i->EStack.pop();
@@ -1296,7 +1296,7 @@ NestModule::MPIAbort_iFunction::execute( SLIInterpreter* i ) const
 void
 NestModule::GetGlobalRngFunction::execute( SLIInterpreter* i ) const
 {
-  librandom::RngPtr rng = get_global_rng();
+  librandom::RngPtr rng = api::get_global_rng();
 
   Token rt( new librandom::RngDatum( rng ) );
   i->OStack.push_move( rt );
@@ -1761,7 +1761,7 @@ NestModule::CreateParameter_DFunction::execute( SLIInterpreter* i ) const
   i->assert_stack_load( 1 );
   const DictionaryDatum param_dict = getValue< DictionaryDatum >( i->OStack.pick( 0 ) );
 
-  ParameterDatum datum = nest::create_parameter( param_dict );
+  ParameterDatum datum = api::create_parameter( param_dict );
 
   i->OStack.pop( 1 );
   i->OStack.push( datum );
@@ -1776,7 +1776,7 @@ NestModule::Mul_P_PFunction::execute( SLIInterpreter* i ) const
   ParameterDatum param1 = getValue< ParameterDatum >( i->OStack.pick( 1 ) );
   ParameterDatum param2 = getValue< ParameterDatum >( i->OStack.pick( 0 ) );
 
-  ParameterDatum newparam = multiply_parameter( param1, param2 );
+  ParameterDatum newparam = api::multiply_parameter( param1, param2 );
 
   i->OStack.pop( 2 );
   i->OStack.push( newparam );
@@ -1791,7 +1791,7 @@ NestModule::Div_P_PFunction::execute( SLIInterpreter* i ) const
   ParameterDatum param1 = getValue< ParameterDatum >( i->OStack.pick( 1 ) );
   ParameterDatum param2 = getValue< ParameterDatum >( i->OStack.pick( 0 ) );
 
-  ParameterDatum newparam = divide_parameter( param1, param2 );
+  ParameterDatum newparam = api::divide_parameter( param1, param2 );
 
   i->OStack.pop( 2 );
   i->OStack.push( newparam );
@@ -1806,7 +1806,7 @@ NestModule::Add_P_PFunction::execute( SLIInterpreter* i ) const
   ParameterDatum param1 = getValue< ParameterDatum >( i->OStack.pick( 1 ) );
   ParameterDatum param2 = getValue< ParameterDatum >( i->OStack.pick( 0 ) );
 
-  ParameterDatum newparam = add_parameter( param1, param2 );
+  ParameterDatum newparam = api::add_parameter( param1, param2 );
 
   i->OStack.pop( 2 );
   i->OStack.push( newparam );
@@ -1820,7 +1820,7 @@ NestModule::Exp_PFunction::execute( SLIInterpreter* i ) const
 
   ParameterDatum param = getValue< ParameterDatum >( i->OStack.pick( 0 ) );
 
-  ParameterDatum newparam = exp_parameter( param );
+  ParameterDatum newparam = api::exp_parameter( param );
 
   i->OStack.pop( 1 );
   i->OStack.push( newparam );
@@ -1834,7 +1834,7 @@ NestModule::Sin_PFunction::execute( SLIInterpreter* i ) const
 
   ParameterDatum param = getValue< ParameterDatum >( i->OStack.pick( 0 ) );
 
-  ParameterDatum newparam = sin_parameter( param );
+  ParameterDatum newparam = api::sin_parameter( param );
 
   i->OStack.pop( 1 );
   i->OStack.push( newparam );
@@ -1848,7 +1848,7 @@ NestModule::Cos_PFunction::execute( SLIInterpreter* i ) const
 
   ParameterDatum param = getValue< ParameterDatum >( i->OStack.pick( 0 ) );
 
-  ParameterDatum newparam = cos_parameter( param );
+  ParameterDatum newparam = api::cos_parameter( param );
 
   i->OStack.pop( 1 );
   i->OStack.push( newparam );
@@ -1863,7 +1863,7 @@ NestModule::Pow_P_dFunction::execute( SLIInterpreter* i ) const
   ParameterDatum param = getValue< ParameterDatum >( i->OStack.pick( 1 ) );
   double exponent = getValue< double >( i->OStack.pick( 0 ) );
 
-  ParameterDatum newparam = pow_parameter( param, exponent );
+  ParameterDatum newparam = api::pow_parameter( param, exponent );
 
   i->OStack.pop( 2 );
   i->OStack.push( newparam );
@@ -1878,7 +1878,7 @@ NestModule::Sub_P_PFunction::execute( SLIInterpreter* i ) const
   ParameterDatum param1 = getValue< ParameterDatum >( i->OStack.pick( 1 ) );
   ParameterDatum param2 = getValue< ParameterDatum >( i->OStack.pick( 0 ) );
 
-  ParameterDatum newparam = subtract_parameter( param1, param2 );
+  ParameterDatum newparam = api::subtract_parameter( param1, param2 );
 
   i->OStack.pop( 2 );
   i->OStack.push( newparam );
@@ -1895,7 +1895,7 @@ NestModule::Compare_P_P_DFunction::execute( SLIInterpreter* i ) const
   ParameterDatum param2 = getValue< ParameterDatum >( i->OStack.pick( 1 ) );
   DictionaryDatum param3 = getValue< DictionaryDatum >( i->OStack.pick( 0 ) );
 
-  ParameterDatum newparam = compare_parameter( param1, param2, param3 );
+  ParameterDatum newparam = api::compare_parameter( param1, param2, param3 );
 
   i->OStack.pop( 3 );
   i->OStack.push( newparam );
@@ -1912,7 +1912,7 @@ NestModule::Conditional_P_P_PFunction::execute( SLIInterpreter* i ) const
   ParameterDatum param2 = getValue< ParameterDatum >( i->OStack.pick( 1 ) );
   ParameterDatum param3 = getValue< ParameterDatum >( i->OStack.pick( 0 ) );
 
-  ParameterDatum newparam = conditional_parameter( param1, param2, param3 );
+  ParameterDatum newparam = api::conditional_parameter( param1, param2, param3 );
 
   i->OStack.pop( 3 );
   i->OStack.push( newparam );
@@ -1927,7 +1927,7 @@ NestModule::Min_P_dFunction::execute( SLIInterpreter* i ) const
   ParameterDatum param = getValue< ParameterDatum >( i->OStack.pick( 1 ) );
   double other_value = getValue< double >( i->OStack.pick( 0 ) );
 
-  ParameterDatum newparam = min_parameter( param, other_value );
+  ParameterDatum newparam = api::min_parameter( param, other_value );
 
   i->OStack.pop( 2 );
   i->OStack.push( newparam );
@@ -1942,7 +1942,7 @@ NestModule::Max_P_dFunction::execute( SLIInterpreter* i ) const
   ParameterDatum param = getValue< ParameterDatum >( i->OStack.pick( 1 ) );
   double other_value = getValue< double >( i->OStack.pick( 0 ) );
 
-  ParameterDatum newparam = max_parameter( param, other_value );
+  ParameterDatum newparam = api::max_parameter( param, other_value );
 
   i->OStack.pop( 2 );
   i->OStack.push( newparam );
@@ -1958,7 +1958,7 @@ NestModule::Redraw_P_d_dFunction::execute( SLIInterpreter* i ) const
   double min = getValue< double >( i->OStack.pick( 1 ) );
   double max = getValue< double >( i->OStack.pick( 0 ) );
 
-  ParameterDatum newparam = redraw_parameter( param, min, max );
+  ParameterDatum newparam = api::redraw_parameter( param, min, max );
 
   i->OStack.pop( 3 );
   i->OStack.push( newparam );
@@ -1973,7 +1973,7 @@ NestModule::Dimension2d_P_PFunction::execute( SLIInterpreter* i ) const
   ParameterDatum param1 = getValue< ParameterDatum >( i->OStack.pick( 1 ) );
   ParameterDatum param2 = getValue< ParameterDatum >( i->OStack.pick( 0 ) );
 
-  ParameterDatum newparam = dimension_parameter( param1, param2 );
+  ParameterDatum newparam = api::dimension_parameter( param1, param2 );
 
   i->OStack.pop( 2 );
   i->OStack.push( newparam );
@@ -1989,7 +1989,7 @@ NestModule::Dimension3d_P_P_PFunction::execute( SLIInterpreter* i ) const
   ParameterDatum param2 = getValue< ParameterDatum >( i->OStack.pick( 1 ) );
   ParameterDatum param3 = getValue< ParameterDatum >( i->OStack.pick( 0 ) );
 
-  ParameterDatum newparam = dimension_parameter( param1, param2, param3 );
+  ParameterDatum newparam = api::dimension_parameter( param1, param2, param3 );
 
   i->OStack.pop( 3 );
   i->OStack.push( newparam );
@@ -2006,7 +2006,7 @@ NestModule::GetValue_PFunction::execute( SLIInterpreter* i ) const
 
   ParameterDatum param = getValue< ParameterDatum >( i->OStack.pick( 0 ) );
 
-  double value = get_value( param );
+  double value = api::get_value( param );
 
   i->OStack.pop( 1 );
   i->OStack.push( value );
@@ -2020,7 +2020,7 @@ NestModule::IsSpatial_PFunction::execute( SLIInterpreter* i ) const
 
   auto param = getValue< ParameterDatum >( i->OStack.pick( 0 ) );
 
-  bool parameter_is_spatial = is_spatial( param );
+  bool parameter_is_spatial = api::is_spatial( param );
 
   i->OStack.pop( 1 );
   i->OStack.push( parameter_is_spatial );
@@ -2038,7 +2038,7 @@ NestModule::Apply_P_DFunction::execute( SLIInterpreter* i ) const
   auto positions = getValue< DictionaryDatum >( i->OStack.pick( 0 ) );
   auto param = getValue< ParameterDatum >( i->OStack.pick( 1 ) );
 
-  auto result = apply( param, positions );
+  auto result = api::apply( param, positions );
 
   i->OStack.pop( 2 );
   i->OStack.push( result );
@@ -2053,7 +2053,7 @@ NestModule::Apply_P_gFunction::execute( SLIInterpreter* i ) const
   NodeCollectionDatum nc = getValue< NodeCollectionDatum >( i->OStack.pick( 0 ) );
   ParameterDatum param = getValue< ParameterDatum >( i->OStack.pick( 1 ) );
 
-  auto result = apply( param, nc );
+  auto result = api::apply( param, nc );
 
   i->OStack.pop( 2 );
   i->OStack.push( result );
@@ -2095,7 +2095,7 @@ NestModule::CreateLayer_D_DFunction::execute( SLIInterpreter* i ) const
 
   for ( auto&& node_id_triple : *layer )
   {
-    set_node_status( node_id_triple.node_id, params );
+    api::set_node_status( node_id_triple.node_id, params );
   }
 
   i->OStack.pop( 2 );

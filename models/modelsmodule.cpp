@@ -306,39 +306,39 @@ ModelsModule::init( SLIInterpreter* )
 #endif
 
   // register all connection models
-  register_connection_model< BernoulliConnection >( "bernoulli_synapse" );
-  register_connection_model< ClopathConnection >(
-    "clopath_synapse", default_connection_model_flags | RegisterConnectionModelFlags::REQUIRES_CLOPATH_ARCHIVING );
-  register_connection_model< ContDelayConnection >( "cont_delay_synapse" );
-  register_connection_model< HTConnection >( "ht_synapse" );
-  register_connection_model< Quantal_StpConnection >( "quantal_stp_synapse" );
-  register_connection_model< StaticConnection >( "static_synapse" );
-  register_connection_model< StaticConnectionHomW >( "static_synapse_hom_w" );
-  register_connection_model< STDPConnection >( "stdp_synapse" );
-  register_connection_model< STDPConnectionHom >( "stdp_synapse_hom" );
-  register_connection_model< STDPDopaConnection >( "stdp_dopamine_synapse" );
-  register_connection_model< STDPFACETSHWConnectionHom >( "stdp_facetshw_synapse_hom" );
-  register_connection_model< STDPNNRestrConnection >( "stdp_nn_restr_synapse" );
-  register_connection_model< STDPNNSymmConnection >( "stdp_nn_symm_synapse" );
-  register_connection_model< STDPNNPreCenteredConnection >( "stdp_nn_pre-centered_synapse" );
-  register_connection_model< STDPPLConnectionHom >( "stdp_pl_synapse_hom" );
-  register_connection_model< STDPTripletConnection >( "stdp_triplet_synapse" );
-  register_connection_model< TsodyksConnection >( "tsodyks_synapse" );
-  register_connection_model< TsodyksConnectionHom >( "tsodyks_synapse_hom" );
-  register_connection_model< Tsodyks2Connection >( "tsodyks2_synapse" );
-  register_connection_model< UrbanczikConnection >(
-    "urbanczik_synapse", default_connection_model_flags | RegisterConnectionModelFlags::REQUIRES_URBANCZIK_ARCHIVING );
-  register_connection_model< VogelsSprekelerConnection >( "vogels_sprekeler_synapse" );
+  api::register_connection_model< BernoulliConnection >( "bernoulli_synapse" );
+  api::register_connection_model< ClopathConnection >(
+    "clopath_synapse", api::default_connection_model_flags | RegisterConnectionModelFlags::REQUIRES_CLOPATH_ARCHIVING );
+  api::register_connection_model< ContDelayConnection >( "cont_delay_synapse" );
+  api::register_connection_model< HTConnection >( "ht_synapse" );
+  api::register_connection_model< Quantal_StpConnection >( "quantal_stp_synapse" );
+  api::register_connection_model< StaticConnection >( "static_synapse" );
+  api::register_connection_model< StaticConnectionHomW >( "static_synapse_hom_w" );
+  api::register_connection_model< STDPConnection >( "stdp_synapse" );
+  api::register_connection_model< STDPConnectionHom >( "stdp_synapse_hom" );
+  api::register_connection_model< STDPDopaConnection >( "stdp_dopamine_synapse" );
+  api::register_connection_model< STDPFACETSHWConnectionHom >( "stdp_facetshw_synapse_hom" );
+  api::register_connection_model< STDPNNRestrConnection >( "stdp_nn_restr_synapse" );
+  api::register_connection_model< STDPNNSymmConnection >( "stdp_nn_symm_synapse" );
+  api::register_connection_model< STDPNNPreCenteredConnection >( "stdp_nn_pre-centered_synapse" );
+  api::register_connection_model< STDPPLConnectionHom >( "stdp_pl_synapse_hom" );
+  api::register_connection_model< STDPTripletConnection >( "stdp_triplet_synapse" );
+  api::register_connection_model< TsodyksConnection >( "tsodyks_synapse" );
+  api::register_connection_model< TsodyksConnectionHom >( "tsodyks_synapse_hom" );
+  api::register_connection_model< Tsodyks2Connection >( "tsodyks2_synapse" );
+  api::register_connection_model< UrbanczikConnection >(
+    "urbanczik_synapse", api::default_connection_model_flags | RegisterConnectionModelFlags::REQUIRES_URBANCZIK_ARCHIVING );
+  api::register_connection_model< VogelsSprekelerConnection >( "vogels_sprekeler_synapse" );
 
   // register secondary connection models
-  register_secondary_connection_model< GapJunction >(
+  api::register_secondary_connection_model< GapJunction >(
     "gap_junction", RegisterConnectionModelFlags::REQUIRES_SYMMETRIC | RegisterConnectionModelFlags::SUPPORTS_WFR );
 
-  register_secondary_connection_model< RateConnectionInstantaneous >(
+  api::register_secondary_connection_model< RateConnectionInstantaneous >(
     "rate_connection_instantaneous", RegisterConnectionModelFlags::SUPPORTS_WFR );
-  register_secondary_connection_model< RateConnectionDelayed >(
+  api::register_secondary_connection_model< RateConnectionDelayed >(
     "rate_connection_delayed", RegisterConnectionModelFlags::HAS_DELAY );
-  register_secondary_connection_model< DiffusionConnection >(
+  api::register_secondary_connection_model< DiffusionConnection >(
     "diffusion_connection", RegisterConnectionModelFlags::SUPPORTS_WFR );
 }
 
