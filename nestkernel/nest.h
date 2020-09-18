@@ -68,16 +68,12 @@ namespace api
 {
 
 void init_nest( int* argc, char** argv[] );
-// void fail_exit( int exitcode );                                                                /// Not used?
-
-// void install_module( const std::string& module_name );                                         /// Not used?
 
 void reset_kernel();
 
 void enable_dryrun_mode( const index n_procs );
 
 void register_logger_client( const deliver_logging_event_ptr client_callback );
-
 
 const RegisterConnectionModelFlags default_connection_model_flags = RegisterConnectionModelFlags::REGISTER_HPC
   | RegisterConnectionModelFlags::REGISTER_LBL | RegisterConnectionModelFlags::IS_PRIMARY
@@ -112,16 +108,16 @@ void set_node_status( const index node_id, const DictionaryDatum& dict );
 DictionaryDatum get_node_status( const index node_id );
 
 void set_connection_status( const ConnectionDatum& conn, const DictionaryDatum& dict );
-// DictionaryDatum get_connection_status( const ConnectionDatum& conn );                          /// Not used?
+DictionaryDatum get_connection_status( const ConnectionDatum& conn );
 
 NodeCollectionPTR create( const Name& model_name, const index n );
 
 NodeCollectionPTR get_nodes( const DictionaryDatum& dict, const bool local_only );
 
-// void connect( NodeCollectionPTR sources,                                                       /// Not used?
-//  NodeCollectionPTR targets,
-//  const DictionaryDatum& connectivity,
-//  const DictionaryDatum& synapse_params );
+void connect( NodeCollectionPTR sources,
+  NodeCollectionPTR targets,
+  const DictionaryDatum& connectivity,
+  const DictionaryDatum& synapse_params );
 
 /**
  * @brief Connect arrays of node IDs one-to-one

@@ -538,11 +538,7 @@ NestModule::GetStatus_CFunction::execute( SLIInterpreter* i ) const
 
   ConnectionDatum conn = getValue< ConnectionDatum >( i->OStack.pick( 0 ) );
 
-  DictionaryDatum result_dict = kernel().connection_manager.get_synapse_status( conn.get_source_node_id(),
-    conn.get_target_node_id(),
-    conn.get_target_thread(),
-    conn.get_synapse_model_id(),
-    conn.get_port() );
+  DictionaryDatum result_dict = api::get_connection_status( conn );
 
   i->OStack.pop();
   i->OStack.push( result_dict );
@@ -920,7 +916,7 @@ NestModule::Connect_g_g_D_DFunction::execute( SLIInterpreter* i ) const
   DictionaryDatum synapse_params = getValue< DictionaryDatum >( i->OStack.pick( 0 ) );
 
   // dictionary access checking is handled by connect
-  kernel().connection_manager.connect( sources, targets, connectivity, synapse_params );
+  api::connect( sources, targets, connectivity, synapse_params );
 
   i->OStack.pop( 4 );
   i->EStack.pop();

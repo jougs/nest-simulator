@@ -45,14 +45,6 @@ namespace nest::api
     kernel().initialize();
   }
 
-  void fail_exit( int )
-  {
-  }
-
-  void install_module( const std::string& )
-  {
-  }
-
   void reset_kernel()
   {
     kernel().reset();
