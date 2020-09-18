@@ -326,8 +326,8 @@ ModelsModule::init( SLIInterpreter* )
   api::register_connection_model< TsodyksConnection >( "tsodyks_synapse" );
   api::register_connection_model< TsodyksConnectionHom >( "tsodyks_synapse_hom" );
   api::register_connection_model< Tsodyks2Connection >( "tsodyks2_synapse" );
-  api::register_connection_model< UrbanczikConnection >(
-    "urbanczik_synapse", api::default_connection_model_flags | RegisterConnectionModelFlags::REQUIRES_URBANCZIK_ARCHIVING );
+  api::register_connection_model< UrbanczikConnection >( "urbanczik_synapse",
+    api::default_connection_model_flags | RegisterConnectionModelFlags::REQUIRES_URBANCZIK_ARCHIVING );
   api::register_connection_model< VogelsSprekelerConnection >( "vogels_sprekeler_synapse" );
 
   // register secondary connection models

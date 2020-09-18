@@ -63,14 +63,14 @@ struct EnableBitMaskOperators< RegisterConnectionModelFlags >
   static const bool enable = true;
 };
 
-  
+
 namespace api
 {
 
 void init_nest( int* argc, char** argv[] );
-//void fail_exit( int exitcode );                                                                /// Not used?
+// void fail_exit( int exitcode );                                                                /// Not used?
 
-//void install_module( const std::string& module_name );                                         /// Not used?
+// void install_module( const std::string& module_name );                                         /// Not used?
 
 void reset_kernel();
 
@@ -112,13 +112,13 @@ void set_node_status( const index node_id, const DictionaryDatum& dict );
 DictionaryDatum get_node_status( const index node_id );
 
 void set_connection_status( const ConnectionDatum& conn, const DictionaryDatum& dict );
-//DictionaryDatum get_connection_status( const ConnectionDatum& conn );                          /// Not used?
+// DictionaryDatum get_connection_status( const ConnectionDatum& conn );                          /// Not used?
 
 NodeCollectionPTR create( const Name& model_name, const index n );
 
 NodeCollectionPTR get_nodes( const DictionaryDatum& dict, const bool local_only );
 
-//void connect( NodeCollectionPTR sources,                                                       /// Not used?
+// void connect( NodeCollectionPTR sources,                                                       /// Not used?
 //  NodeCollectionPTR targets,
 //  const DictionaryDatum& connectivity,
 //  const DictionaryDatum& synapse_params );
