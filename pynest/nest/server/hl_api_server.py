@@ -289,13 +289,17 @@ def serialize(call, args, kwargs):
     if call.__name__.startswith('Set'):
         status = {}
         if call.__name__ == 'SetDefaults':
-            status = nest.GetDefaults(kwargs['model'])
-        elif call.__name__ == 'SetKernelStatus':
+#            status = nest.GetDefaults(kwargs['model'])
+            status = nest.GetDefaults()
+        elif call.__name__ == 'GetKernelStatus':
             status = nest.GetKernelStatus()
+        elif call.__name__ == 'SetKernelStatus':
+            status = nest.SetKernelStatus(kwargs['params'])
         elif call.__name__ == 'SetStructuralPlasticityStatus':
             status = nest.GetStructuralPlasticityStatus(kwargs['params'])
         elif call.__name__ == 'SetStatus':
-            status = nest.GetStatus(kwargs['nodes'])
+#            status = nest.GetStatus(kwargs['nodes'])
+            status = nest.SetStatus(kwargs['nodes'], kwargs['params'])
         for key, val in kwargs['params'].items():
             if key in status:
                 kwargs['params'][key] = type(status[key])(val)
